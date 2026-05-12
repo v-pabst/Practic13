@@ -471,7 +471,6 @@ public:
 //    matrixSet.add(m1);
 //    matrixSet.add(m2);
 //    matrixSet.add(m1); // дубликат не добавится
-//    cout << "Множество матриц:" << endl;
 //    matrixSet.show();
 //
 //    //Множество скалярных матриц
@@ -481,7 +480,6 @@ public:
 //    ScalarMatrix sm2(2, 5);
 //    scalarSet.add(sm1);
 //    scalarSet.add(sm2);
-//    cout << "Множество скалярных матриц:" << endl;
 //    scalarSet.show();
 //
 //    //Множество треугольных матриц
@@ -493,7 +491,6 @@ public:
 //    tm2.setTriangularElement(1, 0, 8);
 //    triSet.add(tm1);
 //    triSet.add(tm2);
-//    cout << "Множество треугольных матриц:" << endl;
 //    triSet.show();
 //
 //    return 0;
