@@ -1,14 +1,13 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <cstring>
 using namespace std;
 
-//Иерархия классов матричные структуры
 class SquareMatrix {
 protected:
-    static int totalElements;  
-    static int maxSize = 5;
-    int size; 
+    static int totalElements;
+    static int const maxSize = 5;
+    int size;
     int data[maxSize][maxSize];
 public:
     SquareMatrix(int size = 1) {
@@ -19,7 +18,7 @@ public:
         totalElements += this->size * this->size;
     }
 
-    int getSize() { return size; }
+    int getSize() const { return size; } 
 
     void setValue(int i, int j, int value) {
         if (i >= 0 && i < size && j >= 0 && j < size) {
@@ -27,14 +26,14 @@ public:
         }
     }
 
-    int getValue(int i, int j) {
+    int getValue(int i, int j) const { 
         if (i >= 0 && i < size && j >= 0 && j < size) {
             return data[i][j];
         }
         return 0;
     }
 
-    virtual void print() {
+    virtual void print() const {  
         cout << "Square Matrix" << endl;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++)
@@ -54,6 +53,7 @@ public:
         return totalElements;
     }
 };
+
 
 int SquareMatrix::totalElements = 0;
 
@@ -91,7 +91,7 @@ public:
                         setValue(i, j, 0);
                 }
                 else {
-                    
+
                     if (i < j)
                         setValue(i, j, 0);
                 }
@@ -124,60 +124,60 @@ public:
     }
 };
 
-//int main() {
-//    setlocale(LC_ALL, "");
-//
-//    SquareMatrix m1(3);
-//    m1.setValue(0, 0, 1);
-//    m1.setValue(1, 1, 2);
-//    m1.setValue(2, 2, 3);
-//    m1.print();
-//    cout << endl;
-//
-//    m1.multiplyScalar(2);
-//    m1.print();
-//    cout << endl;
-//
-//    ScalarMatrix sm(3, 5);
-//    sm.print();
-//    cout << endl;
-//
-//    sm.multiplyScalar(3);
-//    sm.print();
-//    cout << endl;
-//
-//    TriangularMatrix tm1(3, true);
-//    tm1.setTriangularElement(0, 1, 7);
-//    tm1.setTriangularElement(0, 2, 8);
-//    tm1.setTriangularElement(1, 2, 9);
-//    tm1.print();
-//    cout << endl;
-//
-//    tm1.multiplyScalar(2);
-//    tm1.print();
-//    cout << endl;
-//
-//    TriangularMatrix tm2(3, false);
-//    tm2.setTriangularElement(1, 0, 4);
-//    tm2.setTriangularElement(2, 0, 5);
-//    tm2.setTriangularElement(2, 1, 6);
-//    tm2.print();
-//    cout << endl;
-//
-//    tm2.multiplyScalar(3);
-//    tm2.print();
-//    cout << endl;
-//
-//    cout << "Всего элементов: " << SquareMatrix::getTotalElements() << endl;
-//
-//    return 0;
-//}
+int main() {
+    setlocale(LC_ALL, "");
+
+    SquareMatrix m1(3);
+    m1.setValue(0, 0, 1);
+    m1.setValue(1, 1, 2);
+    m1.setValue(2, 2, 3);
+    m1.print();
+    cout << endl;
+
+    m1.multiplyScalar(2);
+    m1.print();
+    cout << endl;
+
+    ScalarMatrix sm(3, 5);
+    sm.print();
+    cout << endl;
+
+    sm.multiplyScalar(3);
+    sm.print();
+    cout << endl;
+
+    TriangularMatrix tm1(3, true);
+    tm1.setTriangularElement(0, 1, 7);
+    tm1.setTriangularElement(0, 2, 8);
+    tm1.setTriangularElement(1, 2, 9);
+    tm1.print();
+    cout << endl;
+
+    tm1.multiplyScalar(2);
+    tm1.print();
+    cout << endl;
+
+    TriangularMatrix tm2(3, false);
+    tm2.setTriangularElement(1, 0, 4);
+    tm2.setTriangularElement(2, 0, 5);
+    tm2.setTriangularElement(2, 1, 6);
+    tm2.print();
+    cout << endl;
+
+    tm2.multiplyScalar(3);
+    tm2.print();
+    cout << endl;
+
+    cout << "Всего элементов: " << SquareMatrix::getTotalElements() << endl;
+
+    return 0;
+}
 
 //Абстрактный тип данных - множество set
 const int MAX_SIZE = 20;
 
 class Set {
-    int count; 
+    int count;
     char* elem;
 
 public:
@@ -224,7 +224,7 @@ Set::Set(const Set& obj) {
 
 // Деструктор
 Set::~Set() {
-    delete[] elem;  
+    delete[] elem;
 }
 
 bool Set::operator>(char ch) const {
@@ -431,70 +431,70 @@ public:
 
     int getCount() const { return count; }
 };
-
-int main() {
-    setlocale(LC_ALL, "");
-
-    //Множество символов
-    cout << "Множество символов" << endl;
-    SetTemplate<char> charSet;
-    charSet.add('A');
-    charSet.add('B');
-    charSet.add('C');
-    charSet.add('A'); // дубликат
-    cout << "Множество символов: ";
-    charSet.show();
-
-    SetTemplate<char> charSet2;
-    charSet2.add('B');
-    charSet2.add('C');
-    charSet2.add('D');
-    cout << "Множество символов 2: ";
-    charSet2.show();
-
-    SetTemplate<char> intersect = charSet.intersection(charSet2);
-    cout << "Пересечение: ";
-    intersect.show();
-    cout << "Подмножество? " << (intersect.isSubset(charSet) ? "да" : "нет") << endl;
-
-    //Множество квадратных матриц
-    cout << "\n Множество квадратных матриц" << endl;
-    SetTemplate<SquareMatrix> matrixSet;
-    SquareMatrix m1(2);
-    m1.setValue(0, 0, 1); m1.setValue(0, 1, 2);
-    m1.setValue(1, 0, 3); m1.setValue(1, 1, 4);
-
-    SquareMatrix m2(2);
-    m2.setValue(0, 0, 5); m2.setValue(0, 1, 6);
-    m2.setValue(1, 0, 7); m2.setValue(1, 1, 8);
-
-    matrixSet.add(m1);
-    matrixSet.add(m2);
-    matrixSet.add(m1); // дубликат не добавится
-    cout << "Множество матриц:" << endl;
-    matrixSet.show();
-
-    //Множество скалярных матриц
-    cout << "\n Множество скалярных матриц" << endl;
-    SetTemplate<ScalarMatrix> scalarSet;
-    ScalarMatrix sm1(2, 3);
-    ScalarMatrix sm2(2, 5);
-    scalarSet.add(sm1);
-    scalarSet.add(sm2);
-    cout << "Множество скалярных матриц:" << endl;
-    scalarSet.show();
-
-    //Множество треугольных матриц
-    cout << "\n Множество треугольных матриц" << endl;
-    SetTemplate<TriangularMatrix> triSet;
-    TriangularMatrix tm1(2, true);
-    tm1.setTriangularElement(0, 1, 7);
-    TriangularMatrix tm2(2, false);
-    tm2.setTriangularElement(1, 0, 8);
-    triSet.add(tm1);
-    triSet.add(tm2);
-    cout << "Множество треугольных матриц:" << endl;
-    triSet.show();
-
-    return 0;
-}
+//
+//int main() {
+//    setlocale(LC_ALL, "");
+//
+//    //Множество символов
+//    cout << "Множество символов" << endl;
+//    SetTemplate<char> charSet;
+//    charSet.add('A');
+//    charSet.add('B');
+//    charSet.add('C');
+//    charSet.add('A'); // дубликат
+//    cout << "Множество символов: ";
+//    charSet.show();
+//
+//    SetTemplate<char> charSet2;
+//    charSet2.add('B');
+//    charSet2.add('C');
+//    charSet2.add('D');
+//    cout << "Множество символов 2: ";
+//    charSet2.show();
+//
+//    SetTemplate<char> intersect = charSet.intersection(charSet2);
+//    cout << "Пересечение: ";
+//    intersect.show();
+//    cout << "Подмножество? " << (intersect.isSubset(charSet) ? "да" : "нет") << endl;
+//
+//    //Множество квадратных матриц
+//    cout << "\n Множество квадратных матриц" << endl;
+//    SetTemplate<SquareMatrix> matrixSet;
+//    SquareMatrix m1(2);
+//    m1.setValue(0, 0, 1); m1.setValue(0, 1, 2);
+//    m1.setValue(1, 0, 3); m1.setValue(1, 1, 4);
+//
+//    SquareMatrix m2(2);
+//    m2.setValue(0, 0, 5); m2.setValue(0, 1, 6);
+//    m2.setValue(1, 0, 7); m2.setValue(1, 1, 8);
+//
+//    matrixSet.add(m1);
+//    matrixSet.add(m2);
+//    matrixSet.add(m1); // дубликат не добавится
+//    cout << "Множество матриц:" << endl;
+//    matrixSet.show();
+//
+//    //Множество скалярных матриц
+//    cout << "\n Множество скалярных матриц" << endl;
+//    SetTemplate<ScalarMatrix> scalarSet;
+//    ScalarMatrix sm1(2, 3);
+//    ScalarMatrix sm2(2, 5);
+//    scalarSet.add(sm1);
+//    scalarSet.add(sm2);
+//    cout << "Множество скалярных матриц:" << endl;
+//    scalarSet.show();
+//
+//    //Множество треугольных матриц
+//    cout << "\n Множество треугольных матриц" << endl;
+//    SetTemplate<TriangularMatrix> triSet;
+//    TriangularMatrix tm1(2, true);
+//    tm1.setTriangularElement(0, 1, 7);
+//    TriangularMatrix tm2(2, false);
+//    tm2.setTriangularElement(1, 0, 8);
+//    triSet.add(tm1);
+//    triSet.add(tm2);
+//    cout << "Множество треугольных матриц:" << endl;
+//    triSet.show();
+//
+//    return 0;
+//}
