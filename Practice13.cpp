@@ -7,7 +7,7 @@ using namespace std;
 class SquareMatrix {
 protected:
     static int totalElements;  
-    static const int maxSize = 5;
+    static int maxSize = 5;
     int size; 
     int data[maxSize][maxSize];
 public:
@@ -19,7 +19,7 @@ public:
         totalElements += this->size * this->size;
     }
 
-    int getSize() const { return size; }
+    int getSize() { return size; }
 
     void setValue(int i, int j, int value) {
         if (i >= 0 && i < size && j >= 0 && j < size) {
@@ -27,14 +27,14 @@ public:
         }
     }
 
-    int getValue(int i, int j) const {
+    int getValue(int i, int j) {
         if (i >= 0 && i < size && j >= 0 && j < size) {
             return data[i][j];
         }
         return 0;
     }
 
-    virtual void print() const {
+    virtual void print() {
         cout << "Square Matrix" << endl;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++)
@@ -69,7 +69,7 @@ public:
                     setValue(i, j, 0);
     }
 
-    void print() const {
+    void print() {
         SquareMatrix::print();
         cout << "Type: \tScalar Matrix" << endl;
     }
@@ -99,7 +99,7 @@ public:
         }
     }
 
-    void print() const {
+    void print() {
         SquareMatrix::print();
         cout << "Type: \tTriangular Matrix" << endl;
         cout << "Form: \t" << (isUpper ? "Upper" : "Lower") << endl;
@@ -435,8 +435,8 @@ public:
 int main() {
     setlocale(LC_ALL, "");
 
-    // 1. Множество символов (как в задании)
-    cout << "--- Множество символов ---" << endl;
+    //Множество символов
+    cout << "Множество символов" << endl;
     SetTemplate<char> charSet;
     charSet.add('A');
     charSet.add('B');
@@ -457,8 +457,8 @@ int main() {
     intersect.show();
     cout << "Подмножество? " << (intersect.isSubset(charSet) ? "да" : "нет") << endl;
 
-    // 2. Множество квадратных матриц
-    cout << "\n--- Множество квадратных матриц ---" << endl;
+    //Множество квадратных матриц
+    cout << "\n Множество квадратных матриц" << endl;
     SetTemplate<SquareMatrix> matrixSet;
     SquareMatrix m1(2);
     m1.setValue(0, 0, 1); m1.setValue(0, 1, 2);
@@ -474,8 +474,8 @@ int main() {
     cout << "Множество матриц:" << endl;
     matrixSet.show();
 
-    // 3. Множество скалярных матриц
-    cout << "\n--- Множество скалярных матриц ---" << endl;
+    //Множество скалярных матриц
+    cout << "\n Множество скалярных матриц" << endl;
     SetTemplate<ScalarMatrix> scalarSet;
     ScalarMatrix sm1(2, 3);
     ScalarMatrix sm2(2, 5);
@@ -484,8 +484,8 @@ int main() {
     cout << "Множество скалярных матриц:" << endl;
     scalarSet.show();
 
-    // 4. Множество треугольных матриц
-    cout << "\n--- Множество треугольных матриц ---" << endl;
+    //Множество треугольных матриц
+    cout << "\n Множество треугольных матриц" << endl;
     SetTemplate<TriangularMatrix> triSet;
     TriangularMatrix tm1(2, true);
     tm1.setTriangularElement(0, 1, 7);
